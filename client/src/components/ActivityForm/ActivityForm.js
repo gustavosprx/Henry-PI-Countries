@@ -125,13 +125,9 @@ setError("")
     />
     <section className="activity-form-container">
       <div className= "form-container">
-
         <h2><b>Create Activity</b></h2>
-
-
          <form className= "form"
           onSubmit={handleSubmit}>
-
           <div className="input-box">
             <label htmlFor="name">
               <b>Name</b>
@@ -146,8 +142,6 @@ setError("")
               onChange={(e) => {
                 handleChange(e);
               }}
-
-
             />
 
           </div>
@@ -201,85 +195,66 @@ setError("")
             <div className="difficulty-option">
               <div className="difficulty">
                 <input
-
                   type="radio"
                   id="1"
                   value="1"
                   name="difficulty"
                   onChange={(e) => handleChoose(e)}
-                  
-
                 />
                 <label htmlFor="1">1</label>
               </div>
 
-
               <div className="difficulty">
                 <input
-
                   type="radio"
                   id="2"
                   value="2"
                   name="difficulty"
                   onChange={(e) => handleChoose(e)}
-
                 />
                 <label htmlFor="2">2</label>
               </div>
 
               <div className="difficulty">
                 <input
-
                   type="radio"
                   id="3"
                   value="3"
                   name="difficulty"
                   onChange={(e) => handleChoose(e)}
-
                 />
                 <label htmlFor="3">3</label>
               </div>
 
               <div className="difficulty">
                 <input
-
                   type="radio"
                   id="4"
                   value="4"
                   name="difficulty"
                   onChange={(e) => handleChoose(e)}
-
                 />
                 <label htmlFor="4">4</label>
               </div>
 
               <div className="difficulty">
                 <input
-
                   type="radio"
                   id="5"
                   value="5"
                   name="difficulty"
                   onChange={(e) => handleChoose(e)}
-
-
-
                 />
                 <label htmlFor="5">5</label>
               </div>
-
             </div>
-
           </div>
 
           <div className="season-box">
-
             <label><b>Season</b></label>
             <div className="season-option">
               <div>
-
                 <input
-
                   type="radio"
                   id="Summer"
                   value="Summer"
@@ -290,9 +265,7 @@ setError("")
               </div>
 
               <div>
-
                 <input
-
                   type="radio"
                   id="Autumn"
                   value="Autumn"
@@ -302,17 +275,13 @@ setError("")
                 />
                 <label htmlFor="Autumn" >Autumn </label>
               </div>
-
               <div>
-
                 <input
-
                   type="radio"
                   id="Winter"
                   value="Winter"
                   name="season"
                   onChange={(e) => handleChoose(e)}
-
                 />
                 <label htmlFor="Winter">Winter </label>
               </div>
