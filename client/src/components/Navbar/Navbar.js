@@ -6,26 +6,28 @@ import {
   sort,
   sortNumerico,
   sortContinent,
-  allCountries,
   sortActivity
 
 } from "../../redux/actions"
 
 
-const Navbar = ({ setPagina, input, setInput,inForm,inDetail }) => {
+const Navbar = ({ setPagina,input ,setInput,navbar }) => {
 
-  const { countries, allActivity } = useSelector((state) => state)
+  const { allActivity } = useSelector((state) => state)
   const dispatch = useDispatch()
+
   let activities = []
 
   allActivity.forEach(c => {
+    // console.log(c)
     if (c.Activities.length > 0) {
       c.Activities.forEach(e => {
         activities.push(e.name)
       })
     }
   })
-  const activitiesNoRepeat = [...new Set(activities)];
+
+   const activitiesNoRepeat = [...new Set(activities)];
 
   const handleSelectAlfabetico = (e) => {
     e.preventDefault();
@@ -48,19 +50,24 @@ const Navbar = ({ setPagina, input, setInput,inForm,inDetail }) => {
     setPagina(1);
   }
 
-  function handleSelectActivity(e) {
+  const handleSelectActivity = (e)=> {
     if (e.target.value === "No activities" || e.target.value === "Activities") return
     dispatch(sortActivity(e.target.value));
     setInput((input = 1));
     setPagina(1);
   }
 
+
+
+  
+
   return (
     <header>
       <a href="/countries" className='header-link'>Countries App</a>
-      {inForm || inDetail ?<Link to="/countries">
+      {navbar ?<Link to="/countries">
           <button className="create-activity-btn" ><b>Go Back</b></button>
-        </Link>:(<><Search setInput={setInput} setPagina={setPagina} />
+        </Link>:(<>
+        <Search setInput={setInput} setPagina={setPagina} />
         <nav>
         <ul className='orders'>
           <li><select
@@ -99,8 +106,7 @@ const Navbar = ({ setPagina, input, setInput,inForm,inDetail }) => {
             onChange={(e) => { handleSelectActivity(e) }}
           >
             <option value={"Activities"}>Activities &#8645;</option>
-            {countries.Activities === [] ? (<option value={'No activities'}>No Activities yet</option>) : null}
-            {
+            {activitiesNoRepeat.length === 0 ? <option key={Math.random()} >No activities yet</option> :
               activitiesNoRepeat?.map(activity => {
                 console.log(activity)
                 return (

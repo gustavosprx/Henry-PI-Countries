@@ -1,10 +1,8 @@
 import React,{useState} from "react";
-// import style from "./Paginacion.module.css";
-// import atras from "./atras-01.png";
-// import adelante from "./adelante-01.png";
+
 
 function Paginacion({ setInput,input,pagina, setPagina, maximo }) {
-// const [input,setInput] = useState(1)
+
 
 const nextPage = () => {
     setInput(parseInt(input)+1)

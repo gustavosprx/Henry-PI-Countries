@@ -4,7 +4,7 @@ const deleteActivityByName = async (params) => {
     const { name } = params
     console.log(name)
     try {
-        const deleted =await Activity.destroy({
+        const deleted = await Activity.destroy({
             where: {
               name: name
             }

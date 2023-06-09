@@ -6,13 +6,12 @@ import Pagination from "../Pagination/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import {
   allCountries,
-  clear,
 } from "../../redux/actions";
 
 
 const Home = () => {
 
-  const { countries, allActivity } = useSelector((state) => state);
+  const { countries } = useSelector((state) => state);
   
 
     const [pagina, setPagina] = useState(1);
@@ -26,11 +25,6 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(allCountries());
-    setTimeout(function() {
-
-      console.log('Loading...',countries)
-    }, 1000);
-    dispatch(clear());
     
   }, [dispatch]);
 
@@ -44,7 +38,7 @@ const Home = () => {
       />
       
       <h1 className="home-title">Discover the world</h1>
-      {countries === 'No se encontro el pais'?<h2>No countries found. Sorry! :(</h2>
+      {countries === 'No se encontro el país'?<h2>No countries found. Sorry! :(</h2>
       :
       <div className='card-container'>
         {

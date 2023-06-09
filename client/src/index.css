@@ -1,7 +1,9 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=NTR&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
 
 
  html, body {
@@ -61,7 +63,7 @@
   font-family: 'Open Sans',sans-serif;
   margin-right: 20px;
   backdrop-filter: blur(10px);
-  margin-top: 50px;
+  margin-top: 110px;
 }
 
 .card-detail-image{
@@ -94,7 +96,7 @@ section h3 {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) ;
   font-family: 'Montserrat', sans-serif;
   backdrop-filter: blur(10px);
-  margin-top: 50px;
+  margin-top: 110px;
 }
 .activity-container section {
   margin-top: 20px;
@@ -201,7 +203,7 @@ section h3 {
 .image-container .image {
   padding-left: 20px;
   padding: 10px;
-   width: 90%;
+  width: 90%;
   height: 200px;
   object-fit: cover;
   border-top-left-radius: 5px;
@@ -279,7 +281,7 @@ header{
 }
 
 header .header-link{
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Varela', sans-serif;
   font-size: 2.5rem;
   color: #9D70E6;
   text-decoration: none;
@@ -350,8 +352,8 @@ nav li select:hover{
 .search{
   display: flex;
   align-items: center;
-  width: 300px; /* Ajusta el ancho según tus necesidades */
-  border-radius: 20px; /* Ajusta el radio según tus necesidades */
+  width: 300px; 
+  border-radius: 20px; 
   background-color: #f5f5f5;
   overflow: hidden;
 }
@@ -379,7 +381,9 @@ nav li select:hover{
 }
 
 
-
+.hidden-navbar {
+  display: none;
+}
 
 /* Pagination */
 .paginationContainer {
@@ -440,14 +444,14 @@ input[type="number"]::-webkit-outer-spin-button {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh; /* Ajusta la altura al 100% del viewport */
-  display: flex; /* Activa el modo de visualización flexible */
-  flex-direction: column; /* Alinea los elementos en una columna */
-  justify-content: center; /* Centra verticalmente los elementos */
-  align-items: center; /* Centra horizontalmente los elementos */
-  text-align: center; /* Centra el texto */
-  color: #fff; /* Color de texto blanco */
-  padding: 2rem; /* Espacio interno alrededor del contenido */
+  height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  justify-content:center; 
+  align-items: flex-start; 
+  text-align: center; 
+  color: #fff; 
+  padding: 2rem; 
 }
 
 .entry-h1{
@@ -467,8 +471,8 @@ font-weight: bold;
   font-size: 2rem;
   margin-bottom: 4rem;
   color: #62d9ff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-left: 11rem;
 }
 
 .entry-btn {
@@ -484,7 +488,7 @@ font-weight: bold;
   font-family: 'Open Sans', sans-serif;
   font-size: 17px;
   font-weight: 300;
-
+  margin-left:17rem;
 }
 
 .entry-btn:hover{
@@ -496,6 +500,7 @@ font-weight: bold;
   vertical-align: middle;
   margin-left: 10px;
 }
+
 
 /* FORM */
 .activity-form-container {

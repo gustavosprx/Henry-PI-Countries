@@ -1,9 +1,8 @@
 const { Country,Activity } = require('../db')
-const {getAllCountriesDb} = require('./getAllCountries')
 
 const CountryById = async (id) => {
 
-    try{
+    try{    
         
    const idFormated = id.toUpperCase() 
    const detailCountry = await Country.findOne({

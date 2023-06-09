@@ -1,9 +1,8 @@
 import axios from "axios";
 export const ALL_COUNTRIES = "ALL_COUNTRIES";
 export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME";
- export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
+export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
 export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
-export const CLEAR = "CLEAR";
 export const SORT = "SORT";
 export const SORT_POPULATION = "SORT_POPULATION";
 export const SORT_CONTINENT = "SORT_CONTINENT";
@@ -25,15 +24,6 @@ export function allCountries() {
     });
   };
 }
-
-export function clear() {
-    return (dispatch) => {
-      return dispatch({
-        type: CLEAR,
-        payload: [],
-      });
-    };
-  }
 
   export function countryById(id) {
     return async (dispatch) => {
@@ -115,6 +105,7 @@ export function clear() {
         });
     };
   }
+
 
   export function sortActivity(payload) {
     return (dispatch) => {

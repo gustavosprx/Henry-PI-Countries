@@ -3,7 +3,6 @@ import {
     GET_COUNTRY_ID,
      GET_COUNTRY_NAME,
     CREATE_ACTIVITY,
-    CLEAR,
     SORT,
     SORT_POPULATION,
     SORT_CONTINENT,
@@ -31,10 +30,10 @@ import {
         };
   
       case GET_COUNTRY_NAME:
+        console.log('desde country', action.payload)
         return {
           ...state,
           countries: action.payload,
-          countrieName: action.payload,
         };
   
       case GET_COUNTRY_ID:
@@ -67,20 +66,20 @@ import {
         }
       case SORT_POPULATION:
         if (action.payload === "asc") {
-          let countriesMaMe = state.countries.sort((a, b) =>
+          let countriesDes = state.countries.sort((a, b) =>
             a.population > b.population ? 1 : a.population < b.population ? -1 : 0
           );
           return {
             ...state,
-            countries: countriesMaMe,
+            countries: countriesDes,
           };
         } else {
-          let countriesMeMa = state.countries.sort((b, a) =>
+          let countriesAsc = state.countries.sort((b, a) =>
             a.population > b.population ? 1 : a.population < b.population ? -1 : 0
           );
           return {
             ...state,
-            countries: countriesMeMa,
+            countries: countriesAsc,
           };
         }
       case SORT_CONTINENT:
@@ -131,11 +130,6 @@ import {
           countries: mapeoCountries,
         };
   
-      case CLEAR:
-        return {
-          ...state,
-          detail: action.payload,
-        };
       default:
         return { ...state };
     }

@@ -29,7 +29,7 @@ const Search = ({ setInput, setPagina }) => {
         onChange={(e) => handleChange(e)}
         placeholder="Buscar país"
       />
-      <button className="search-btn"  onClick={ handleSumit}>
+      <button className="search-btn"  onClick={handleSumit}>
         <img src="https://cdn-icons-png.flaticon.com/512/483/483356.png" alt="Icono de lupa" />
       </button>
     </div>)

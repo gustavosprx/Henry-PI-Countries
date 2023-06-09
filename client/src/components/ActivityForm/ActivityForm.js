@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { allCountries, createActivity, sort } from "../../redux/actions";
 
-
 const ActivitForm = () => {
-
   const [state, setState] = useState({
     name: "",
     difficulty: 0,
@@ -16,24 +13,24 @@ const ActivitForm = () => {
   });
   const [error, setError] = useState("");
   const [mostrarError, setMostrarError] = useState(false);
-  const [inForm,setInForm] = useState(false)
 
   const { countries } = useSelector((state) => state);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(allCountries());
       dispatch(sort('asc'));
-      setInForm(true)
     };
 
     fetchData();
   }, [dispatch]);
 
-
   const reloadPage = () => {
     window.location.reload();
-  }
+  };
+
+  const navbar = true;
 
   function handleSelect(e) {
     if (state.countries.includes(e.target.value)) {
@@ -70,10 +67,10 @@ const ActivitForm = () => {
   }
 
   function handleSubmit(e) {
-
     e.preventDefault();
 
-    const { name, difficulty, season, countries } = state;
+    const { name, difficulty, duration, season, countries } = state;
+
     if (
       !name.trim() ||
       !/^[a-zA-Z\ áéíóúÁÉÍÓÚñÑ\s]*$/.test(name) ||
@@ -85,27 +82,39 @@ const ActivitForm = () => {
       setMostrarError(true);
       return;
     }
-    if (!name) {
-      setError("Compleat this sector whit a name");
-      setMostrarError(true);
-      return;
-    }
 
     if (!difficulty) {
       setError("You must select a Difficulty level");
       setMostrarError(true);
       return;
     }
+
     if (!season.trim()) {
       setError("You must select some season of the year");
       setMostrarError(true);
       return;
     }
+
     if (countries.length < 1) {
       setError("You must select at least one country");
       setMostrarError(true);
       return;
     }
+
+    if (duration.trim() === '') {
+      setError("Field cannot be empty");
+      setMostrarError(true);
+      return;
+    } else {
+      const durationSplit = duration.split(':');
+      const hours = parseInt(durationSplit[0], 10);
+      if (hours < 1 || hours > 12) {
+        setError("Value must be between 1 and 12 hours");
+        setMostrarError(true);
+        return;
+      }
+    }
+
     dispatch(createActivity(state));
     setState({
       name: "",
@@ -114,233 +123,133 @@ const ActivitForm = () => {
       season: "",
       countries: [],
     });
-setError("")
+
+    setError("");
     alert("Your activity was successfully created");
-    reloadPage()
+    reloadPage();
   }
+
   return (
     <>
-    <Navbar 
-      inForm={inForm}
-    />
-    <section className="activity-form-container">
-      <div className= "form-container">
-        <h2><b>Create Activity</b></h2>
-         <form className= "form"
-          onSubmit={handleSubmit}>
-          <div className="input-box">
-            <label htmlFor="name">
-              <b>Name</b>
-            </label>
-            <input
-              className="input-name"
-              placeholder="Activity Name"
-              type="text"
-              id="name"
-              name="name"
-              value={state.name}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-            />
-
-          </div>
-
-          <div className="input-box">
-            <label ><b>Country</b></label>
-            <select
-              className="select-country"
-              placeholder="Selecciona el o los paises"
-              name="countries"
-              onChange={e => handleSelect(e)}
-              required
-            >
-              
-              <option hidden>Choose the countries</option>
-              {countries && countries.map((element, index) => {
-                return (
-                  <option value={element.id} key={element.id}>
-
-                    {element.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div>
-            {state.countries?.map((country) => {
-              return (
-                <div className="country-selected" key={Math.random()}>
-                  <div>
-                  <span>
-                      {countries.find((c) => c.id === country).name}
-                  </span>
-                    <button
-                    className="remove-country"
-                      value={country}
-                      type="button"
-                      onClick={(e) => handleRemove(e)}
-                    >
-                      x
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>    
-
-
-          <div className="difficulty-box">
-            <label className="label-d"><b>Difficulty</b></label>
-            <div className="difficulty-option">
-              <div className="difficulty">
-                <input
-                  type="radio"
-                  id="1"
-                  value="1"
-                  name="difficulty"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="1">1</label>
-              </div>
-
-              <div className="difficulty">
-                <input
-                  type="radio"
-                  id="2"
-                  value="2"
-                  name="difficulty"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="2">2</label>
-              </div>
-
-              <div className="difficulty">
-                <input
-                  type="radio"
-                  id="3"
-                  value="3"
-                  name="difficulty"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="3">3</label>
-              </div>
-
-              <div className="difficulty">
-                <input
-                  type="radio"
-                  id="4"
-                  value="4"
-                  name="difficulty"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="4">4</label>
-              </div>
-
-              <div className="difficulty">
-                <input
-                  type="radio"
-                  id="5"
-                  value="5"
-                  name="difficulty"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="5">5</label>
-              </div>
-            </div>
-          </div>
-
-          <div className="season-box">
-            <label><b>Season</b></label>
-            <div className="season-option">
-              <div>
-                <input
-                  type="radio"
-                  id="Summer"
-                  value="Summer"
-                  name="season"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="Summer">Summer </label>
-              </div>
-
-              <div>
-                <input
-                  type="radio"
-                  id="Autumn"
-                  value="Autumn"
-                  name="season"
-                  onChange={(e) => handleChoose(e)}
-
-                />
-                <label htmlFor="Autumn" >Autumn </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="Winter"
-                  value="Winter"
-                  name="season"
-                  onChange={(e) => handleChoose(e)}
-                />
-                <label htmlFor="Winter">Winter </label>
-              </div>
-
-              <div>
-
-                <input
-
-                  type="radio"
-                  id="Spring"
-                  value="Spring"
-                  name="season"
-                  onChange={(e) => handleChoose(e)}
-
-                />
-                <label htmlFor="Spring">Spring</label>
-              </div>
-
-            </div>
-
-          </div>
-
-
-
-
-
-          <div className="duration-box">
-            <label htmlFor="name">
-              <b>Duration</b>
-            </label>
-
-            <div>
+      <Navbar navbar={navbar} />
+      <section className="activity-form-container">
+        <div className="form-container">
+          <h2><b>Create Activity</b></h2>
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="input-box">
+              <label htmlFor="name"><b>Name</b></label>
               <input
-                className="input-time"
-                name="duration"
-                value={state.duration}
-                type="time"
-                min="01:00"
-                max="12:00"
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                required
+                className="input-name"
+                placeholder="Activity Name"
+                type="text"
+                id="name"
+                name="name"
+                value={state.name}
+                onChange={handleChange}
               />
             </div>
-          </div>
 
+            <div className="input-box">
+              <label><b>Country</b></label>
+              <select
+                className="select-country"
+                placeholder="Selecciona el o los paises"
+                name="countries"
+                onChange={handleSelect}
+                required
+              >
+                <option hidden>Choose the countries</option>
+                {countries && countries.map((element) => {
+                  return (
+                    <option value={element.id} key={element.id}>
+                      {element.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
 
+            <div>
+              {state.countries?.map((country) => {
+                return (
+                  <div className="country-selected" key={Math.random()}>
+                    <div>
+                      <span>
+                        {countries.find((c) => c.id === country).name}
+                      </span>
+                      <button
+                        className="remove-country"
+                        value={country}
+                        type="button"
+                        onClick={handleRemove}
+                      >
+                        x
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
+            <div className="difficulty-box">
+              <label className="label-d"><b>Difficulty</b></label>
+              <div className="difficulty-option">
+                {[1, 2, 3, 4, 5].map((difficultyLevel) => (
+                  <div className="difficulty" key={difficultyLevel}>
+                    <input
+                      type="radio"
+                      id={difficultyLevel}
+                      value={difficultyLevel}
+                      name="difficulty"
+                      onChange={handleChoose}
+                    />
+                    <label htmlFor={difficultyLevel}>{difficultyLevel}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <button className="submit" type="submit">
-            Create
-          </button>
-          {mostrarError?<p style={{color:"#F56B58", textAlign:"center" }}><b>{error}</b></p>:null}
-        </form>
-      </div > 
-    </section >
+            <div className="season-box">
+              <label><b>Season</b></label>
+              <div className="season-option">
+                {["Summer", "Autumn", "Winter", "Spring"].map((season) => (
+                  <div key={season}>
+                    <input
+                      type="radio"
+                      id={season}
+                      value={season}
+                      name="season"
+                      onChange={handleChoose}
+                    />
+                    <label htmlFor={season}>{season}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="duration-box">
+              <label htmlFor="name"><b>Duration</b></label>
+              <div>
+                <input
+                  className="input-time"
+                  name="duration"
+                  value={state.duration}
+                  type="time"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <button className="submit" type="submit">Create</button>
+
+            {mostrarError ? (
+              <p style={{ color: "#FFF", textAlign: "center" }}><b>{error}</b></p>
+            ) : null}
+          </form>
+        </div>
+      </section>
     </>
-  )
-}
+  );
+};
 
 export default ActivitForm;
